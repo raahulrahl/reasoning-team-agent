@@ -198,7 +198,7 @@ async def initialize_all(env: dict[str, str] | None = None):
     Args:
         env: Environment variables dict for MCP servers
     """
-    #await initialize_mcp_tools(env)
+    # await initialize_mcp_tools(env)
     await initialize_agent()
 
 
