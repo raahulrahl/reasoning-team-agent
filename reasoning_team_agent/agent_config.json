@@ -1,0 +1,51 @@
+{
+    "author": "raahul@getbindu.com",
+    "name": "reasoning-team-agent",
+    "description": "Build a Reasoning Team in Agno that answers complex queries by orchestrating specialized agents with transparent analytical thinking. The team leader uses reasoning tools to plan and delegate tasks like web search and financial data retrieval, then synthesizes findings into structured, source-backed insights. Ideal for financial research platforms, investment analysis tools, market intelligence systems, and decision support applications, this setup makes the team’s reasoning process visible and auditable.",
+    "version": "1.0.0",
+    "recreate_keys": false,
+    
+    "skills": [
+      
+      
+        "skills/explainable-business-reasoning"
+      
+    ],
+    
+    "capabilities": {
+    },
+    
+
+    "agent_trust": "low",
+    "debug_mode": true,
+    "debug_level": 2,
+    
+    "deployment": {
+        "url": "http://0.0.0.0:3773",
+        "expose": true,
+        "protocol_version": "1.0.0",
+        "proxy_urls": ["0.0.0.0"],
+        "cors_origins": ["*"]
+    },
+    "storage": {
+      "type": "memory"
+    },
+    "scheduler": {
+      "type": "memory"
+    },
+
+    
+    "num_history_sessions": 5,
+    "environment_variables": [
+      {
+        "key": "OPENROUTER_API_KEY",
+        "description": "OpenRouter API key for LLM calls",
+        "required": true
+      },
+      {
+        "key": "MEM0_API_KEY",
+        "description": "Mem0 API key for memory operations",
+        "required": true
+      }
+    ]
+  }

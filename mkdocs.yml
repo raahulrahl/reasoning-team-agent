@@ -1,0 +1,52 @@
+site_name: reasoning-team-agent
+repo_url: https://github.com/raahulrahl/reasoning-team-agent
+site_url: https://raahulrahl.github.io/reasoning-team-agent
+site_description: Build a Reasoning Team in Agno that answers complex queries by orchestrating specialized agents with transparent analytical thinking. The team leader uses reasoning tools to plan and delegate tasks like web search and financial data retrieval, then synthesizes findings into structured, source-backed insights. Ideal for financial research platforms, investment analysis tools, market intelligence systems, and decision support applications, this setup makes the team’s reasoning process visible and auditable.
+site_author: raahul
+edit_uri: edit/main/docs/
+repo_name: raahulrahl/reasoning-team-agent
+copyright: Maintained by <a href="https://raahulrahl.com">raahulrahl</a>.
+
+nav:
+  - Home: index.md
+  - Modules: modules.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["src/reasoning_team_agent"]
+theme:
+  name: material
+  feature:
+    tabs: true
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/raahulrahl/reasoning-team-agent
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/reasoning-team-agent
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true

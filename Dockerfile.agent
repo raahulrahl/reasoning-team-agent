@@ -1,0 +1,48 @@
+# Dockerfile.agent
+#
+# Multi-stage build for a Bindu agent (airbnb-travel-agent example).
+# Builder: python:3.12-bookworm + uv
+# Runtime: bindu-runtime-base
+
+# ---------- Builder stage ----------
+FROM python:3.12-bookworm AS builder
+
+# Install uv once in builder (no need in runtime)
+RUN pip install --no-cache-dir uv
+
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+WORKDIR /app
+
+# 1) Install dependencies into .venv (lockfile + pyproject)
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-install-project --no-dev
+
+# 2) Copy agent code
+COPY reasoning_team_agent/ /app/reasoning_team_agent/
+COPY *.py /app/
+COPY README.md /app/
+
+# 3) Install project itself into the same venv
+RUN uv sync --frozen --no-dev
+
+# ---------- Runtime stage ----------
+FROM raahulrahl/bindu-runtime-base:latest
+
+# OCI labels
+LABEL org.opencontainers.image.title="reasoning-team-agent"
+LABEL org.opencontainers.image.description="Build a Reasoning Team in Agno that answers complex queries by orchestrating specialized agents with transparent analytical thinking. The team leader uses reasoning tools to plan and delegate tasks like web search and financial data retrieval, then synthesizes findings into structured, source-backed insights. Ideal for financial research platforms, investment analysis tools, market intelligence systems, and decision support applications, this setup makes the team’s reasoning process visible and auditable."
+LABEL org.opencontainers.image.authors="raahul <raahul@getbindu.com>"
+LABEL org.opencontainers.image.version="1.0.0"
+LABEL org.opencontainers.image.source="https://github.com/raahulrahl/reasoning-team-agent"
+LABEL org.opencontainers.image.licenses="MIT"
+
+# Copy app + venv from builder
+COPY --from=builder /app /app
+
+# Use the agent venv Python by default
+ENV PATH="/app/.venv/bin:$PATH"
+
+WORKDIR /app
+EXPOSE 3773
+
+CMD ["python", "-m", "reasoning_team_agent"]
