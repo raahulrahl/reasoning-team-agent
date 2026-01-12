@@ -24,9 +24,11 @@
 Build a Reasoning Team in Agno that answers complex queries by orchestrating specialized agents with transparent analytical thinking. The team leader uses reasoning tools to plan and delegate tasks like web search and financial data retrieval, then synthesizes findings into structured, source-backed insights. Ideal for financial research platforms, investment analysis tools, market intelligence systems, and decision support applications, this setup makes the team’s reasoning process visible and auditable.. Built on the [Bindu Agent Framework](https://github.com/getbindu/bindu) for the Internet of Agents.
 
 **Key Capabilities:**
-- 🔍 [Add your key capabilities here]
-- ✅ [Add another capability]
-- 🚨 [Add another capability]
+- 🧠 Multi-agent reasoning with transparent analytical thinking
+- 🔍 Web search via DuckDuckGo for general queries
+- 💰 Financial data retrieval from trusted sources (CNBC, Reuters, Bloomberg, WSJ)
+- 🔗 MCP server integration (Google Maps, Airbnb)
+- 📊 Structured, source-backed insights
 
 ---
 
@@ -93,34 +95,37 @@ gh repo create raahulrahl/reasoning-team-agent --public --source=. --remote=orig
 ### Example Queries
 
 ```bash
-# Example query 1
-"[Add example query here]"
+# Financial analysis
+"Analyze Tesla's recent financial performance and market sentiment"
 
-# Example query 2
-"[Add another example]"
+# Market research
+"Compare investment opportunities in renewable energy sector"
+
+# Trend analysis
+"Research market trends for AI startups in 2024"
 ```
 
 ### Input Formats
 
 **Plain Text:**
 ```
-[Describe expected input format]
+Natural language queries about financial data, market research, or general web search topics
 ```
 
 **JSON:**
 ```json
-{
-  "content": "[example content]",
-  "focus": "[example focus]"
-}
+[
+  {"role": "user", "content": "Your query here"}
+]
 ```
 
 ### Output Structure
 
 The agent returns structured output with:
-- **[Output Component 1]**: Description
-- **[Output Component 2]**: Description
-- **[Output Component 3]**: Description
+- **Analysis**: Synthesized findings from multiple agents
+- **Reasoning Steps**: Transparent step-by-step analytical process
+- **Sources**: Citations from web search and financial data sources
+- **Member Responses**: Individual agent contributions (web search, finance)
 
 ---
 
@@ -145,30 +150,35 @@ For complete API documentation, request/response formats, and examples, visit:
 
 ## 🎯 Skills
 
-### reasoning_team_agent (v1.0.0)
+### explainable-business-reasoning (v1.0.0)
 
 **Primary Capability:**
-- [Describe what this skill does]
-- [Add key features]
+- Multi-agent reasoning with web search and financial data retrieval
+- Transparent reasoning process with step-by-step analysis
+- Specialized agents for web search and financial data
 
 **Features:**
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- Reasoning team leader orchestrates specialized agents
+- Web search agent with DuckDuckGo integration
+- Finance agent with curated financial news sources
+- MCP server support for extended capabilities
+- Source-backed insights with citations
 
 **Best Used For:**
-- [Use case 1]
-- [Use case 2]
-- [Use case 3]
+- Complex queries requiring multiple data sources
+- Financial research and market analysis
+- Investment opportunity comparisons
+- Tasks needing transparent reasoning process
 
 **Not Suitable For:**
-- [Anti-pattern 1]
-- [Anti-pattern 2]
+- Real-time trading execution
+- Simple fact lookup queries
+- Tasks requiring domain-specific proprietary data
 
 **Performance:**
-- Average processing time: ~[X] seconds
-- Max concurrent requests: [N]
-- Memory per request: [X]MB
+- Average processing time: ~1-2 seconds
+- Max concurrent requests: 10
+- Memory per request: 256MB
 
 ---
 

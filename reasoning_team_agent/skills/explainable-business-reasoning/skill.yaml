@@ -5,13 +5,16 @@ author: raahul@getbindu.com
 
 # Description
 description: |
-  Description of the explainable-business-reasoning skill.
-  TODO: Update this description with your skill's purpose and capabilities.
+  Orchestrates specialized agents with transparent reasoning to answer complex queries.
+  Uses reasoning tools to plan, delegate tasks, and synthesize findings into structured insights.
 
 # Tags and Modes
 tags:
   - explainable-business-reasoning
-  - TODO-add-relevant-tags
+  - reasoning
+  - team-orchestration
+  - financial-analysis
+  - web-search
 
 input_modes:
   - text/plain
@@ -23,32 +26,37 @@ output_modes:
 
 # Example Queries
 examples:
-  - "TODO: Add example query 1"
-  - "TODO: Add example query 2"
-  - "TODO: Add example query 3"
+  - "Analyze Tesla's recent financial performance and market sentiment"
+  - "Compare investment opportunities in renewable energy sector"
+  - "Research market trends for AI startups in 2024"
 
 # Detailed Capabilities
 capabilities_detail:
   primary_capability:
     supported: true
-    description: "TODO: Describe your primary capability"
+    description: "Multi-agent reasoning with web search and financial data retrieval"
     features:
-      - "TODO: Feature 1"
-      - "TODO: Feature 2"
-    limitations: "TODO: List any limitations"
+      - "Transparent reasoning process with step-by-step analysis"
+      - "Specialized agents for web search and financial data"
+      - "Source-backed insights with citations"
+    limitations: "Requires external API access (OpenRouter, DuckDuckGo, Exa)"
 
   secondary_capability:
-    supported: false
-    planned_version: "TODO: Future version"
-    description: "TODO: Planned feature description"
+    supported: true
+    description: "MCP server integration for extended capabilities"
+    features:
+      - "Google Maps integration"
+      - "Airbnb data access"
 
 # Requirements
 requirements:
   packages:
-    - "TODO: Add required Python packages"
+    - "agno"
+    - "bindu"
+    - "python-dotenv"
   system:
-    - "TODO: Add system dependencies if any"
-  min_memory_mb: 256
+    - "Node.js (for MCP servers)"
+  min_memory_mb: 512
 
 # Performance Metrics
 performance:
@@ -66,159 +74,124 @@ allowed_tools:
 # Rich Documentation
 documentation:
   overview: |
-    TODO: Provide a comprehensive overview of your skill.
-    Describe what it does, how it works, and what makes it useful.
-    Include information about the underlying technologies or approaches used.
+    A reasoning team that orchestrates specialized agents to handle complex queries.
+    The team leader uses reasoning tools to plan and delegate tasks to web search and finance agents,
+    then synthesizes their findings into structured, auditable insights.
 
   use_cases:
     when_to_use:
-      - "TODO: Scenario 1 when this skill should be used"
-      - "TODO: Scenario 2 when this skill should be used"
-      - "TODO: Scenario 3 when this skill should be used"
+      - "Complex queries requiring multiple data sources"
+      - "Financial research and market analysis"
+      - "Tasks needing transparent reasoning process"
 
     when_not_to_use:
-      - "TODO: Scenario when this skill should NOT be used"
-      - "TODO: Alternative skill or approach for those scenarios"
-      - "TODO: Limitations or constraints"
+      - "Simple single-source queries"
+      - "Real-time trading decisions"
+      - "Tasks requiring domain-specific proprietary data"
 
   input_structure: |
-    TODO: Describe the expected input format for your skill.
+    Messages array with role and content:
 
-    Example:
-    {
-      "parameter1": "value1",
-      "parameter2": "value2",
-      "options": {
-        "option1": true,
-        "option2": "value"
-      }
-    }
+    [
+      {"role": "user", "content": "Your query here"}
+    ]
 
     Constraints:
-    - TODO: List input constraints
-    - TODO: Validation rules
-    - TODO: Supported formats
+    - Text or JSON format
+    - Natural language queries
+    - Supports multi-turn conversations
 
   output_format: |
-    TODO: Describe the output format your skill produces.
+    Structured response with reasoning steps and findings:
 
-    Success Response:
     {
-      "success": true,
-      "result": {
-        "data": "TODO: Your result data",
-        "metadata": {
-          "processing_time_ms": 1000,
-          "additional_info": "value"
-        }
-      }
-    }
-
-    Error Response:
-    {
-      "success": false,
-      "error": {
-        "code": "ERROR_CODE",
-        "message": "Error description"
-      }
+      "content": "Synthesized analysis with sources",
+      "reasoning_steps": ["Step 1", "Step 2"],
+      "sources": ["URL1", "URL2"]
     }
 
   error_handling:
-    - "TODO: Error type 1 and how it's handled"
-    - "TODO: Error type 2 and how it's handled"
-    - "TODO: Timeout behavior and fallback strategies"
-    - "TODO: Validation errors and user feedback"
-    - "TODO: Resource limit handling"
+    - "API key validation on startup"
+    - "MCP server connection failures handled gracefully"
+    - "30-second timeout for MCP connections"
+    - "Partial failure support for unavailable servers"
 
   examples:
-    - title: "TODO: Example 1 Title"
+    - title: "Financial Analysis Query"
       input:
-        parameter1: "value1"
-        parameter2: "value2"
+        role: "user"
+        content: "Analyze Tesla's Q4 performance"
       output:
-        success: true
-        result:
-          data: "example output"
-        metadata:
-          processing_time_ms: 500
+        content: "Detailed analysis with market data and sources"
+        reasoning: "Multi-step analysis process"
 
-    - title: "TODO: Example 2 Title"
+    - title: "Market Research Query"
       input:
-        parameter1: "different_value"
-        options:
-          option1: true
+        role: "user"
+        content: "Compare renewable energy investments"
       output:
-        success: true
-        result:
-          data: "example output 2"
-        metadata:
-          processing_time_ms: 750
+        content: "Comparative analysis with financial metrics"
+        sources: ["cnbc.com", "reuters.com"]
 
   best_practices:
     for_developers:
-      - "TODO: Best practice 1 for implementing this skill"
-      - "TODO: Best practice 2 for error handling"
-      - "TODO: Best practice 3 for performance optimization"
-      - "TODO: Best practice 4 for testing and validation"
+      - "Initialize MCP tools before agent startup"
+      - "Use lazy initialization for first request"
+      - "Enable response caching for model calls"
+      - "Clean up MCP connections on shutdown"
 
     for_orchestrators:
-      - "TODO: When to route requests to this skill"
-      - "TODO: How to chain this skill with others"
-      - "TODO: Performance considerations for load balancing"
-      - "TODO: Retry and fallback strategies"
-      - "TODO: Monitoring and observability recommendations"
+      - "Route complex multi-source queries to this skill"
+      - "Chain with data analysis skills for deeper insights"
+      - "Consider 10 max concurrent requests limit"
+      - "Monitor MCP server health and connectivity"
 
   installation: |
-    TODO: Provide installation instructions for your skill.
+    Install dependencies:
 
-    Required packages:
-    pip install <your-package-name>
+    uv sync
 
-    Optional dependencies:
-    # TODO: Add platform-specific installation steps if needed
-    # macOS
-    brew install <dependency>
+    Required environment variables:
+    OPENROUTER_API_KEY=<your-key>
+    MEM0_API_KEY=<your-key>
 
-    # Ubuntu/Debian
-    apt-get install <dependency>
-
-    # Windows
-    # TODO: Windows-specific instructions
+    Optional for MCP servers:
+    Node.js 18+ for npx commands
 
   versioning:
     - version: "1.0.0"
-      date: "TODO: Release date"
-      changes: "Initial release with core functionality"
-    - version: "1.1.0"
-      status: "planned"
-      changes: "TODO: Planned enhancements for next version"
+      date: "2024-01-12"
+      changes: "Initial release with reasoning team, web search, and finance agents"
 
 # Assessment fields for skill negotiation
 assessment:
   keywords:
-    - "TODO: keyword1"
-    - "TODO: keyword2"
-    - "TODO: keyword3"
-    - "TODO: Add relevant keywords for skill matching"
+    - "reasoning"
+    - "financial analysis"
+    - "market research"
+    - "web search"
+    - "team orchestration"
 
   specializations:
-    - domain: "TODO: domain1"
+    - domain: "finance"
       confidence_boost: 0.3
-    - domain: "TODO: domain2"
+    - domain: "market-research"
+      confidence_boost: 0.3
+    - domain: "business-analysis"
       confidence_boost: 0.2
 
   anti_patterns:
-    - "TODO: Pattern that should NOT match this skill"
-    - "TODO: Alternative skill name or approach"
-    - "TODO: Out of scope operations"
+    - "Real-time trading execution"
+    - "Simple fact lookup queries"
+    - "Image or video analysis"
 
   complexity_indicators:
     simple:
-      - "TODO: Simple task indicator 1"
-      - "TODO: Simple task indicator 2"
+      - "Single company lookup"
+      - "Basic market data query"
     medium:
-      - "TODO: Medium complexity indicator 1"
-      - "TODO: Medium complexity indicator 2"
+      - "Multi-company comparison"
+      - "Sector analysis"
     complex:
-      - "TODO: Complex task indicator 1"
-      - "TODO: Complex task indicator 2"
+      - "Cross-market analysis with multiple data sources"
+      - "Investment strategy research with reasoning"
