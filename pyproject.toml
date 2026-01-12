@@ -7,7 +7,6 @@ readme = "README.md"
 keywords = ['python']
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "bindu==2026.1.7",
     "agno>=2.2.0",
     "fastmcp>=2.11.0",
     "requests>=2.31.0",
@@ -18,6 +17,7 @@ dependencies = [
     "mem0ai>=1.0.1",
     "ddgs>=9.9.3",
     "exa-py>=2.0.2",
+    "bindu==2026.1.12",
 ]
 classifiers = [
     "Intended Audience :: Developers",
