@@ -7,32 +7,24 @@
 #
 #  Thank you users! We ❤️ you! - 🌻
 
-"""reasoning-team-agent - An Bindu Agent.
-
-"""
+"""reasoning-team-agent - An Bindu Agent."""
 
 import argparse
 import asyncio
 import json
 import os
 from pathlib import Path
-from textwrap import dedent
-from typing import Any, Optional
-
+from typing import Any
 
 from agno.agent import Agent
 from agno.models.openrouter import OpenRouter
-from agno.tools.mcp import MultiMCPTools
-from agno.tools.mem0 import Mem0Tools
-from agno.tools.team import Team
+from agno.team import Team
 from agno.tools.duckduckgo import DuckDuckGoTools
-from agno.tools.reasoning import ReasoningTools
 from agno.tools.exa import ExaTools
-
-
+from agno.tools.mcp import MultiMCPTools
+from agno.tools.reasoning import ReasoningTools
 from bindu.penguin.bindufy import bindufy
 from dotenv import load_dotenv
-
 
 # Load environment variables from .env file
 load_dotenv()
@@ -77,7 +69,7 @@ def load_config() -> dict:
     # Get path to agent_config.json in project root
     config_path = Path(__file__).parent / "agent_config.json"
 
-    with open(config_path, "r") as f:
+    with open(config_path) as f:
         return json.load(f)
 
 
@@ -122,8 +114,7 @@ async def initialize_agent() -> None:
         ],
         instructions=["Use tables to display data"],
     )
-    
-    
+
     agent = Team(
         name="Reasoning Team Leader",
         model=OpenRouter(
@@ -143,7 +134,7 @@ async def initialize_agent() -> None:
     print("✅ Agent initialized")
 
 
-async def cleanup_mcp_tools()-> None:
+async def cleanup_mcp_tools() -> None:
     """Close all MCP server connections."""
     global mcp_tools
 
@@ -171,8 +162,6 @@ async def run_agent(messages: list[dict[str, str]]) -> Any:
     return response
 
 
-
-
 async def handler(messages: list[dict[str, str]]) -> Any:
     """Handle incoming agent messages.
 
@@ -183,7 +172,6 @@ async def handler(messages: list[dict[str, str]]) -> Any:
     Returns:
         Agent response (ManifestWorker will handle extraction)
     """
-    
     # Run agent with messages
     global _initialized
 
@@ -194,7 +182,7 @@ async def handler(messages: list[dict[str, str]]) -> Any:
             # Build environment with API keys
             env = {
                 **os.environ,
-                #"GOOGLE_MAPS_API_KEY": os.getenv("GOOGLE_MAPS_API_KEY", ""),
+                # "GOOGLE_MAPS_API_KEY": os.getenv("GOOGLE_MAPS_API_KEY", ""),
             }
             await initialize_all(env)
             _initialized = True
@@ -202,10 +190,9 @@ async def handler(messages: list[dict[str, str]]) -> Any:
     # Run the async agent
     result = await run_agent(messages)
     return result
-    
 
 
-async def initialize_all(env: Optional[dict[str, str]] = None):
+async def initialize_all(env: dict[str, str] | None = None):
     """Initialize MCP tools and agent.
 
     Args:
@@ -248,9 +235,9 @@ def main():
     mem0_api_key = args.mem0_api_key
 
     if not api_key:
-        raise ValueError("OPENROUTER_API_KEY required") # noqa: TRY003
+        raise ValueError("OPENROUTER_API_KEY required")  # noqa: TRY003
     if not mem0_api_key:
-        raise ValueError("MEM0_API_KEY required. Get your API key from: https://app.mem0.ai/dashboard/api-keys") # noqa: TRY003
+        raise ValueError("MEM0_API_KEY required. Get your API key from: https://app.mem0.ai/dashboard/api-keys")  # noqa: TRY003
 
     print(f"🤖 Using model: {model_name}")
     print("🧠 Mem0 memory enabled")
