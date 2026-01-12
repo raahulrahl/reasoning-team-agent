@@ -86,7 +86,7 @@ async def initialize_agent() -> None:
         name="Web Search Agent",
         role="Handle web search requests",
         model=OpenRouter(
-            id=model_name,
+            id="openai/gpt-5-mini",
             api_key=api_key,
             cache_response=True,
             supports_native_structured_outputs=True,
@@ -99,7 +99,7 @@ async def initialize_agent() -> None:
         name="Finance Agent",
         role="Handle financial data requests",
         model=OpenRouter(
-            id=model_name,
+            id="openai/gpt-5-mini",
             api_key=api_key,
             cache_response=True,
             supports_native_structured_outputs=True,
@@ -118,7 +118,7 @@ async def initialize_agent() -> None:
     agent = Team(
         name="Reasoning Team Leader",
         model=OpenRouter(
-            id=model_name,
+            id="anthropic/claude-3.7-sonnet",
             api_key=api_key,
             cache_response=True,
             supports_native_structured_outputs=True,
@@ -198,7 +198,7 @@ async def initialize_all(env: dict[str, str] | None = None):
     Args:
         env: Environment variables dict for MCP servers
     """
-    await initialize_mcp_tools(env)
+    #await initialize_mcp_tools(env)
     await initialize_agent()
 
 
@@ -211,8 +211,8 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default=os.getenv("MODEL_NAME", "openai/gpt-oss-120b:free"),
-        help="Model ID to use (default: openai/gpt-oss-120b:free, env: MODEL_NAME), if you want you can use any free model: https://openrouter.ai/models?q=free",
+        default=os.getenv("MODEL_NAME", "openai/gpt-5-nano"),
+        help="Model ID to use (default: openai/gpt-5-nano, env: MODEL_NAME), if you want you can use any free model: https://openrouter.ai/models?q=free",
     )
 
     parser.add_argument(
