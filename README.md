@@ -23,6 +23,8 @@
 
 Build a Reasoning Team in Agno that answers complex queries by orchestrating specialized agents with transparent analytical thinking. The team leader uses reasoning tools to plan and delegate tasks like web search and financial data retrieval, then synthesizes findings into structured, source-backed insights. Ideal for financial research platforms, investment analysis tools, market intelligence systems, and decision support applications, this setup makes the team’s reasoning process visible and auditable.. Built on the [Bindu Agent Framework](https://github.com/getbindu/bindu) for the Internet of Agents.
 
+[Postman Collection](https://raahul-1409c5b4-717533.postman.co/workspace/getbindu's-Workspace~44eb7cfe-a752-4114-8a1a-631395f07bf1/collection/50606358-3474d469-3125-4d41-8d63-64512d3b1e7f?action=share&creator=50606358)
+
 **Key Capabilities:**
 - 🧠 Multi-agent reasoning with transparent analytical thinking
 - 🔍 Web search via DuckDuckGo for general queries
