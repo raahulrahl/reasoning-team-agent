@@ -13,11 +13,10 @@ dependencies = [
     "pyperclip>=1.8.0",
     "rich>=13.0.0",
     "openai>=2.11.0",
-    "sqlalchemy>=2.0.45",
     "mem0ai>=1.0.1",
     "ddgs>=9.9.3",
     "exa-py>=2.0.2",
-    "bindu==2026.1.12",
+    "bindu==2026.9.4",
 ]
 classifiers = [
     "Intended Audience :: Developers",
